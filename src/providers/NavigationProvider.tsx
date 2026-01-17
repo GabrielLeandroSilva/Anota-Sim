@@ -3,7 +3,7 @@
 import { error } from "console";
 import React, { createContext, useContext, useState } from "react";
 
-export type Section = "todo" | "done" | "new";
+export type Section = "done" | "todo" | "new";
 
 interface NavigationContextData {
     section: Section;

@@ -10,15 +10,15 @@ export function NavBar() {
         <nav className="fixed bottom-0 left-0 right-0 bg-white border-t">
             <ul className="flex justify-around">
                 <NavItem
-                    label="A fazer"
-                    icon={<ListTodo size={18} />}
-                    active={section === "todo"}
-                    onClick={() => setSection("todo")} />
-                <NavItem
                     label="Feitas"
                     icon={<CheckCircle2 size={18} />}
                     active={section === "done"}
                     onClick={() => setSection("done")} />
+                <NavItem
+                    label="A fazer"
+                    icon={<ListTodo size={18} />}
+                    active={section === "todo"}
+                    onClick={() => setSection("todo")} />
                 <NavItem
                     label="Cadastrar"
                     icon={<PlusCircle size={18} />}

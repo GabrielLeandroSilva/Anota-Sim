@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useNavigation } from "../providers/NavigationProvider";
 
-const sections = ["todo", "done", "new"] as const;
+const sections = ["done", "todo", "new"] as const;
 
 export function useSwipeNavigation() {
     const startX = useRef<number | null>(null);
