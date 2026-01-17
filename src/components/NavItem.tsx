@@ -18,10 +18,10 @@ export function NavItem({
   return (
     <button
       onClick={onClick}
-      className="
-        relative flex flex-col items-center gap-1
-        text-xs cursor-pointer
-      "
+      className={`relative flex flex-col items-center gap-1
+        text-xs cursor-pointer px-4 py-2 rounded-md
+         ${active ? "bg-primary/10" : "bg-transparent"}
+        `}
     >
       <div className="relative">
         <Icon

@@ -1,5 +1,6 @@
 "use client"
 import { AnimatedTitle } from "../components/AnimatedTitle";
+import { FadeInSection } from "../components/FadeInSection";
 import { NavBar } from "../components/NavBar";
 import { TaskForm } from "../components/TaskForm";
 import { TaskList } from "../components/TaskList";
@@ -25,13 +26,22 @@ export default function Home() {
 
       <section className="max-w-md mx-auto flex-1 flex w-full">
         {section === "todo" && (
-          <TaskList tasks={todoTasks} onToggle={toggleTask} onDelete={removeTask} emptyMessage="Nenhuma tarefa pendente" />)}
+          <FadeInSection triggerKey="todo">
+            <TaskList tasks={todoTasks} onToggle={toggleTask} onDelete={removeTask} emptyMessage="Nenhuma tarefa pendente" />
+          </FadeInSection>
+          )}
 
         {section === "done" && (
+        <FadeInSection triggerKey="done">
           <TaskList tasks={doneTasks} onToggle={toggleTask} onDelete={removeTask} emptyMessage="Nenhuma tarefa concluída" />
+          </FadeInSection>
         )}
 
-        {section === "new" && <TaskForm onAddTask={addTask} />}
+        {section === "new" && (
+          <FadeInSection triggerKey="new">
+            < TaskForm onAddTask={addTask} />
+          </FadeInSection>
+        )}
       </section>
 
       <NavBar todoCount={todoTasks.length} doneCount={doneTasks.length} />

@@ -13,7 +13,7 @@ export function NavBar({ todoCount, doneCount }: NavBarProps) {
     const { section, setSection } = useNavigation();
     return (
         <nav className="fixed bottom-0 inset-x-0 border-t border-primary bg-zinc-100 dark:bg-zinc-800">
-            <div className="max-w-md mx-auto flex justify-around py-3">
+            <div className="max-w-md mx-auto flex justify-around">
                 <NavItem
                     icon={CheckCircle2}
                     label="Feitas"
