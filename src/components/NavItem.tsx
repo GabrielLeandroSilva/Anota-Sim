@@ -20,7 +20,7 @@ export function NavItem({
       onClick={onClick}
       className="
         relative flex flex-col items-center gap-1
-        text-xs
+        text-xs cursor-pointer
       "
     >
       <div className="relative">

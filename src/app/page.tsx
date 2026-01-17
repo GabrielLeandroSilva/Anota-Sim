@@ -18,12 +18,12 @@ export default function Home() {
   const doneTasks = tasks.filter((t) => t.completed);
 
   return (
-    <main {...swipeHandlers} className="min-h-screen pb-16 px-4 touch-pan-y">
+    <main {...swipeHandlers} className="min-h-screen pb-20 px-4 flex flex-col touch-pan-y">
       <header className="py-6">
         <AnimatedTitle>AnotaSim 📝</AnimatedTitle>
       </header>
 
-      <section className="max-w-md mx-auto">
+      <section className="max-w-md mx-auto flex-1 flex w-full">
         {section === "todo" && (
           <TaskList tasks={todoTasks} onToggle={toggleTask} onDelete={removeTask} emptyMessage="Nenhuma tarefa pendente" />)}
 

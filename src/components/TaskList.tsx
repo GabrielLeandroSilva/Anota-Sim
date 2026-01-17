@@ -1,6 +1,7 @@
 "use client"
 
 import { Task } from "../types/Task";
+import { EmptyState } from "./EmptyState";
 import { TaskItem } from "./TaskItem";
 
 
@@ -14,14 +15,14 @@ interface TaskListProps {
 export function TaskList({ tasks, onToggle, onDelete, emptyMessage }: TaskListProps) {
   if (tasks.length === 0) {
     return (
-      <p className="text-center text-zinc-400 text-sm">
-        {emptyMessage}
-      </p>
+      <div className="flex-1 flex items-center justify-center">
+        <EmptyState message={emptyMessage} />
+      </div>
     )
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 w-full">
       {tasks.map((task) => (
         <TaskItem
           key={task.id}

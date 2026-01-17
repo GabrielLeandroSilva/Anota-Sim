@@ -23,7 +23,7 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
