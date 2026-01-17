@@ -33,7 +33,7 @@ export default function Home() {
         {section === "new" && <TaskForm onAddTask={addTask} />}
       </section>
 
-      <NavBar />
+      <NavBar todoCount={todoTasks.length} doneCount={doneTasks.length} />
       <ThemeToggle />
     </main>
 

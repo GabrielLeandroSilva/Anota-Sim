@@ -19,7 +19,7 @@ export default function ThemeToggle() {
       }
       className="
         fixed
-        bottom-6 right-6
+        bottom-20 right-6
         z-50
         flex items-center justify-center
         w-12 h-12

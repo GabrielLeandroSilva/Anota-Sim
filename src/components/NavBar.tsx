@@ -2,51 +2,41 @@
 
 import { CheckCircle2, ListTodo, PlusCircle } from "lucide-react";
 import { useNavigation } from "../providers/NavigationProvider";
-import React from "react";
+import { NavItem } from "./NavItem";
 
-export function NavBar() {
+interface NavBarProps {
+    todoCount: number;
+    doneCount: number;
+}
+
+export function NavBar({ todoCount, doneCount }: NavBarProps) {
     const { section, setSection } = useNavigation();
     return (
-        <nav className="fixed bottom-0 left-0 right-0 bg-white border-t">
-            <ul className="flex justify-around">
+        <nav className="fixed bottom-0 inset-x-0 border-t bg-white dark:bg-black">
+            <div className="max-w-md mx-auto flex justify-around py-3">
                 <NavItem
+                    icon={CheckCircle2}
                     label="Feitas"
-                    icon={<CheckCircle2 size={18} />}
                     active={section === "done"}
-                    onClick={() => setSection("done")} />
+                    count={doneCount}
+                    onClick={() => setSection("done")}
+                />
+
                 <NavItem
+                    icon={ListTodo}
                     label="A fazer"
-                    icon={<ListTodo size={18} />}
                     active={section === "todo"}
-                    onClick={() => setSection("todo")} />
+                    count={todoCount}
+                    onClick={() => setSection("todo")}
+                />
+
                 <NavItem
-                    label="Cadastrar"
-                    icon={<PlusCircle size={18} />}
+                    icon={PlusCircle}
+                    label="Nova"
                     active={section === "new"}
-                    onClick={() => setSection("new")} />
-            </ul>
+                    onClick={() => setSection("new")}
+                />
+            </div>
         </nav>
-    )
-}
-
-interface NavItemProps {
-    label: string;
-    icon: React.ReactNode;
-    active: boolean;
-    onClick: () => void;
-}
-
-function NavItem({ label, icon, active, onClick }: NavItemProps) {
-    return (
-        <li onClick={onClick}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 cursor-pointer transition-colors
-                ${active
-                    ? "text-white font-semibold border-t-2 border-primary-dark bg-primary"
-                    : "text-gray-900 hover:bg-primary/30"
-                }`
-            }>
-        {icon}
-        <span className="text-xs">{label}</span>   
-        </li>
     )
 }
