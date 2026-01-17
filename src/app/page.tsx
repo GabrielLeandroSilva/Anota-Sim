@@ -1,4 +1,5 @@
 "use client"
+import { AnimatedTitle } from "../components/AnimatedTitle";
 import { NavBar } from "../components/NavBar";
 import { TaskForm } from "../components/TaskForm";
 import { TaskList } from "../components/TaskList";
@@ -18,8 +19,8 @@ export default function Home() {
 
   return (
     <main {...swipeHandlers} className="min-h-screen pb-16 px-4 touch-pan-y">
-      <header className="text-center py-6">
-        <h1 className="text-2xl font-bold">AnotaSim 📝</h1>
+      <header className="py-6">
+        <AnimatedTitle>AnotaSim 📝</AnimatedTitle>
       </header>
 
       <section className="max-w-md mx-auto">
