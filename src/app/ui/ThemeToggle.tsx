@@ -26,7 +26,7 @@ export default function ThemeToggle() {
         rounded-xl
         bg-white/80 dark:bg-black/80
         backdrop-blur
-        border border-black/10 dark:border-white/10
+        border border-primary/50 dark:border-primary/50
         shadow-sm
         hover:scale-105
         transition-all duration-300

@@ -23,7 +23,7 @@ export function FadeInSection({ children, triggerKey }: FadeInSectionProps) {
     return (
         <div
             className={`
-        w-full transition-all duration-500 translate-y-1 ease-out
+        flex w-full transition-all duration-500 translate-y-1 ease-out
         ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}
       `}
         >
