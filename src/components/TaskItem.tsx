@@ -4,6 +4,8 @@ import { Calendar, Check, Trash2 } from "lucide-react";
 import { Task } from "../types/Task";
 import { useState } from "react";
 import { formatDate } from "../app/utils/formatDate";
+import { isToday } from "../app/utils/date";
+import { TodayBadge } from "./TodayBadge";
 
 interface TaskItemProps {
   task: Task;
@@ -72,10 +74,15 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
               ${isAnimating ? "translate-x-1 opacity-60" : ""}
             `}>{task.title}</span>
 
-        <span className="flex items-center gap-1 text-xs text-zinc-400">
+        <div className="flex items-center gap-2 text-xs text-zinc-500 mt-1">
           <Calendar size={12} />
-          {formatDate(task.date)}
-        </span>
+          <span>{formatDate(task.date)}</span>
+
+          { isToday(task.date) && (
+            <TodayBadge />
+          )}
+        </div>
+
       </div>
 
       {/* Delete */}
