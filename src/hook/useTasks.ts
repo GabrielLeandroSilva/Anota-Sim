@@ -18,17 +18,21 @@ export function useTasks() {
       saveTasksToStorage(tasks);
     }, [tasks]);
   
-    function addTask(title: string) {
+    function addTask(title: string, date: string) {
       if (!title.trim()) return;
   
       const newTask: Task = {
         id: crypto.randomUUID(),
         title,
         completed: false,
-        createdAt: new Date().toISOString(),
+        date,
       };
   
-      setTasks((prev) => [newTask, ...prev]);
+      setTasks((prev) => {
+        const updated = [...prev, newTask];
+        saveTasksToStorage(updated);
+        return updated;
+      });
     }
   
     function toggleTask(id: string) {

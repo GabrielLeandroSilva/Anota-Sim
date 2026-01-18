@@ -10,14 +10,18 @@ export function getTasksFromStorage(): Task[] {
     if (!stored) return [];
 
     try {
-        return JSON.parse(stored) as Task[];
+        const parsed: Task[] = JSON.parse(stored);
+        return parsed.map((task) => ({
+            ...task,
+            date: task.date ?? new Date().toISOString().split("T")[0],
+          })).sort((a, b) => a.date.localeCompare(b.date));;
     } catch {
         return [];
     }
 }
 
 export function saveTasksToStorage(tasks: Task[]) {
-    if (typeof window === "undefined") return [];
+    if (typeof window === "undefined") return;
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
 }

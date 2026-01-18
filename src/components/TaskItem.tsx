@@ -1,8 +1,9 @@
 "use client"
 
-import { Check, Trash2 } from "lucide-react";
+import { Calendar, Check, Trash2 } from "lucide-react";
 import { Task } from "../types/Task";
 import { useState } from "react";
+import { formatDate } from "../app/utils/formatDate";
 
 interface TaskItemProps {
   task: Task;
@@ -35,7 +36,7 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
       tabIndex={0}
       className={`
             w-full flex items-center gap-3
-            rounded-lg border p-3
+            rounded-lg border border-primary/50 p-3
             transition-all duration-300 ease-out
             cursor-pointer select-none
             ${task.completed
@@ -48,7 +49,7 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
       {/* Checkbox */}
       <div
         className={`
-              w-5 h-5 rounded-full border
+              circulo rounded-full border
               flex items-center justify-center
               transition-all duration-300
               ${task.completed || isAnimating
@@ -61,18 +62,21 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
       </div>
 
       {/* Texto */}
-      <span
-        className={`
+      <div className="flex flex-col w-full">
+        <span className={`
               flex-1 text-sm transition-all duration-300
               ${task.completed
             ? "line-through text-zinc-400"
             : ""
           }
               ${isAnimating ? "translate-x-1 opacity-60" : ""}
-            `}
-      >
-        {task.title}
-      </span>
+            `}>{task.title}</span>
+
+        <span className="flex items-center gap-1 text-xs text-zinc-400">
+          <Calendar size={12} />
+          {formatDate(task.date)}
+        </span>
+      </div>
 
       {/* Delete */}
       <button
@@ -81,8 +85,8 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
           onDelete(task.id);
         }}
         className="
-          text-zinc-400 hover:text-red-500
-          transition
+          text-red-400
+          transition cursor-pointer
         "
         aria-label="Excluir tarefa"
       >
