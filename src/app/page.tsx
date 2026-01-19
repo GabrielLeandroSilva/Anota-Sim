@@ -9,7 +9,6 @@ import { useSwipeNavigation } from "../hook/useSwipeNavigation";
 import { useTasks } from "../hook/useTasks";
 import { useNavigation } from "../providers/NavigationProvider";
 import ThemeToggle from "./ui/ThemeToggle";
-import { requestNotificationPermission } from "../lib/notifications";
 
 
 export default function Home() {
@@ -19,11 +18,6 @@ export default function Home() {
 
   const todoTasks = tasks.filter((t) => !t.completed);
   const doneTasks = tasks.filter((t) => t.completed);
-
-  useEffect(() => {
-    requestNotificationPermission();
-  }, []);
-  
 
   return (
     <main {...swipeHandlers} className="min-h-screen pb-20 px-4 flex flex-col touch-pan-y">
