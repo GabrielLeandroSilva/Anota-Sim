@@ -24,14 +24,29 @@ export function useTasks() {
 
   useEffect(() => {
     if (!appInitialized) return;
-    tasks.forEach((task) => {
-      if (!task.completed && !task.notified && isToday(task.date)) {
-        notifyTask(task.title);
-
-        updateTask(task.id, {
-          notified: true,
-        });
-      }
+  
+    const tasksToNotify = tasks.filter(
+      (task) =>
+        !task.completed &&
+        !task.notified &&
+        isToday(task.date)
+    );
+  
+    if (tasksToNotify.length === 0) return;
+  
+    tasksToNotify.forEach((task) => {
+      notifyTask(task.title);
+    });
+  
+    setTasks((prev) => {
+      const updated = prev.map((task) =>
+        tasksToNotify.some((t) => t.id === task.id)
+          ? { ...task, notified: true }
+          : task
+      );
+  
+      saveTasksToStorage(updated);
+      return updated;
     });
   }, [appInitialized]);
 
@@ -39,7 +54,7 @@ export function useTasks() {
     if (!title.trim()) return;
 
     const newTask: Task = {
-      id: crypto.randomUUID(),
+      id: `${Date.now()}-${Math.random()}`,
       title,
       completed: false,
       date,
