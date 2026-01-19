@@ -16,9 +16,4 @@ export async function notifyTask(title: string) {
 
     return;
   }
-
-  // 🖥️ Fallback desktop
-  new Notification("AnotaSim", {
-    body: title,
-  });
 }
