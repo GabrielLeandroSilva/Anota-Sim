@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 AnotaSim
 
-## Getting Started
+**AnotaSim** é um aplicativo simples, rápido e moderno para organizar tarefas do dia a dia.  
+Funciona como um **Todo App diário**, com foco em clareza, fluidez e uso offline.
 
-First, run the development server:
+👉 Ideal para quem quer anotar, acompanhar e concluir tarefas sem complexidade.
+
+---
+
+## ✨ Funcionalidades
+
+- ✅ Criar tarefas com data
+- 📅 Agrupamento de tarefas por data
+- 🟢 Badge **Hoje** para tarefas do dia atual
+- 🔄 Alternar tarefas entre **A Fazer** e **Feitas**
+- 🗑️ Excluir tarefas
+- 📊 Contador de tarefas por aba
+- 🎨 Tema **Dark / Light**
+- 📱 Interface mobile-first
+- 📦 Persistência com **localStorage**
+- 🌐 Possibilidade de instalação (PWA)
+
+---
+
+## 🧭 Navegação
+
+O app possui uma navegação fixa no rodapé com 3 seções:
+
+1. **Feitas**
+2. **A Fazer** (aba inicial)
+3. **Nova tarefa**
+
+A troca entre abas possui animações suaves e suporte a swipe no mobile.
+
+---
+
+## 🧑‍💻 Tecnologias Utilizadas
+
+- Next.js (App Router)
+- React
+- TypeScript
+- Tailwind CSS v4
+- Lucide Icons
+- next-themes
+- PWA (Service Worker + Manifest)
+- localStorage
+
+---
+
+## 🚀 Deploy
+
+O projeto está hospedado na **Vercel**:
+
+🔗 https://anotasim.vercel.app
+
+Pode ser instalado como aplicativo no celular (PWA).
+
+---
+
+## 📦 Instalação local
 
 ```bash
+git clone https://github.com/seu-usuario/anotasim.git
+cd anotasim
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse: http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🗂️ Estrutura do Projeto (resumo)
 
-## Learn More
+```
+app/
+components/
+hooks/
+providers/
+types/
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧠 Decisões de Projeto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Sem backend (localStorage)
+- Foco em simplicidade e performance
+- PWA para instalação da aplicação
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 Licença
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
+
+Feito com 💚 para organizar o dia.
