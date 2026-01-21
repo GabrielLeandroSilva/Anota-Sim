@@ -15,7 +15,7 @@ export function TaskDateHeader({ date }: TaskDateHeaderProps) {
       <span className="font-medium">{formatDate(date)}</span>
 
       {today && (
-        <span className="text-xs px-2 py-0.5 rounded-full bg-green-500 text-white">
+        <span className="text-xs px-2 py-0.5 rounded-full bg-primary text-white">
           Hoje
         </span>
       )}

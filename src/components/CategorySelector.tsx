@@ -22,7 +22,7 @@ export function CategorySelector({ value, onChange, categories }: CategorySelect
                   transition
                   ${
                     active
-                      ? "bg-green-500 text-white"
+                      ? "bg-primary text-white"
                       : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
                   }
                 `}
