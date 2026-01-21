@@ -4,8 +4,9 @@ import { Calendar, Check, Trash2 } from "lucide-react";
 import { Task } from "../types/Task";
 import { useState } from "react";
 import { formatDate } from "../app/utils/formatDate";
-import { isToday } from "../app/utils/date";
+import { isPast, isToday } from "../app/utils/date";
 import { TodayBadge } from "./TodayBadge";
+import { OverdueBadge } from "./OverdueBadge";
 
 interface TaskItemProps {
   task: Task;
@@ -15,6 +16,8 @@ interface TaskItemProps {
 
 export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
   const [isAnimating, setIsAnimating] = useState(false);
+  const showToday = isToday(task.date);
+  const showOverdue = isPast(task.date) && !task.completed;
 
   function handleToggle() {
     setIsAnimating(true);
@@ -78,9 +81,9 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
           <Calendar size={12} />
           <span>{formatDate(task.date)}</span>
 
-          { isToday(task.date) && (
-            <TodayBadge />
-          )}
+          {showToday && <TodayBadge />}
+          {showOverdue && <OverdueBadge />}
+          
         </div>
 
       </div>

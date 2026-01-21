@@ -18,7 +18,7 @@ export function useTasks() {
     saveTasksToStorage(tasks);
   }, [tasks]);
 
-  function addTask(title: string, date: string) {
+  function addTask(title: string, date: string, category: string) {
     if (!title.trim()) return;
 
     const newTask: Task = {
@@ -26,6 +26,7 @@ export function useTasks() {
       title,
       completed: false,
       date,
+      category,
     };
 
     setTasks((prev) => {

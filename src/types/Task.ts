@@ -3,4 +3,5 @@ export interface Task {
     title: string;
     completed: boolean;
     date: string;
+    category: string;
 }

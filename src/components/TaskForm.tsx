@@ -2,14 +2,17 @@
 
 import { useState } from "react";
 import { useNavigation } from "../providers/NavigationProvider";
+import { TASK_CATEGORIES } from "../app/constants/categories";
+import { CategorySelector } from "./CategorySelector";
 
 
 interface TaskFormProps {
-  onAddTask: (title: string, date: string) => void;
+  onAddTask: (title: string, date: string, category: string) => void;
 }
 
 export function TaskForm({ onAddTask }: TaskFormProps) {
   const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("Pessoal");
   const [date, setDate] = useState(
     new Date().toISOString().split("T")[0]
   )
@@ -20,7 +23,7 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
 
     if (!title.trim()) return;
 
-    onAddTask(title, date);
+    onAddTask(title, date, category);
     setTitle("");
     setSection("todo");
   }
@@ -45,10 +48,17 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
         value={date}
         onChange={(e) => setDate(e.target.value)}
         className="w-full rounded-lg border px-4 py-3
-          bg-transparent
-          border-zinc-300 dark:border-zinc-700
-          focus:outline-none focus:ring-2 focus:ring-primary"
+    bg-transparent
+    border-zinc-300 dark:border-zinc-700
+    focus:outline-none focus:ring-2 focus:ring-primary"
       />
+      
+      <CategorySelector
+        value={category}
+        onChange={setCategory}
+        categories={TASK_CATEGORIES}
+      />
+
 
       <button
         type="submit"
