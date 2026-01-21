@@ -29,6 +29,7 @@ export default function ThemeToggle() {
         border border-primary/50 dark:border-primary/50
         shadow-sm
         hover:scale-105
+        text-primary
         transition-all duration-300
       "
       aria-label="Alternar tema"

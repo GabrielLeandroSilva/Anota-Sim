@@ -7,8 +7,8 @@ export function TodayBadge() {
           text-xs font-semibold
           rounded-full
           animate-pulse 
-          bg-green-400/20
-          text-green-500
+          bg-primary
+          text-white/70
           dark:bg-green-500/20
           dark:text-green-400
         "

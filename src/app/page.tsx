@@ -1,5 +1,5 @@
 "use client"
-import { useEffect } from "react";
+
 import { AnimatedTitle } from "../components/AnimatedTitle";
 import { FadeInSection } from "../components/FadeInSection";
 import { NavBar } from "../components/NavBar";
@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <main {...swipeHandlers} className="min-h-screen pb-20 px-4 flex flex-col touch-pan-y">
       <header className="py-6">
-        <AnimatedTitle>AnotaSim 📝</AnimatedTitle>
+        <AnimatedTitle>AnotaSim</AnimatedTitle>
       </header>
 
       <section className="max-w-md mx-auto flex-1 flex w-full">

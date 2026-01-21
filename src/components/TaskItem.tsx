@@ -47,8 +47,9 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
             ${task.completed
           ? "bg-zinc-100 dark:bg-zinc-800 opacity-70"
           : "hover:bg-zinc-50 dark:hover:bg-zinc-800"
-        }
+          }
             ${isAnimating ? "scale-[0.98] opacity-60" : ""}
+            ${showOverdue ? "bg-red-400/10 border-red-400/50" : "bg-primary/10"}
           `}
     >
       {/* Checkbox */}
@@ -83,7 +84,7 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
 
           {showToday && <TodayBadge />}
           {showOverdue && <OverdueBadge />}
-          
+
         </div>
 
       </div>

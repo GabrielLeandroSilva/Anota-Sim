@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigation } from "../providers/NavigationProvider";
 import { TASK_CATEGORIES } from "../app/constants/categories";
 import { CategorySelector } from "./CategorySelector";
+import { getTodayInputDate } from "../app/utils/date";
 
 
 interface TaskFormProps {
@@ -13,9 +14,7 @@ interface TaskFormProps {
 export function TaskForm({ onAddTask }: TaskFormProps) {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Pessoal");
-  const [date, setDate] = useState(
-    new Date().toISOString().split("T")[0]
-  )
+  const [date, setDate] = useState(getTodayInputDate())
   const { setSection } = useNavigation();
 
   function handleSubmit(e: React.FormEvent) {
