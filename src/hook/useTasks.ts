@@ -11,12 +11,18 @@ export function useTasks() {
   // Carrega do localStorage
   useEffect(() => {
     const storedTasks = getTasksFromStorage();
-
-    const updatedTasks = ensureHabitTasks(storedTasks);
-
-    setTasks(updatedTasks);
-    saveTasksToStorage(updatedTasks);
+    setTasks(storedTasks);
   }, []);
+
+  useEffect(() => {
+    if (tasks.length === 0) return;
+  
+    const updated = ensureHabitTasks(tasks);
+  
+    if (updated.length !== tasks.length) {
+      setTasks(updated);
+    }
+  }, [tasks]);
 
   // Persiste no localStorage
   useEffect(() => {
@@ -25,54 +31,54 @@ export function useTasks() {
 
   function ensureHabitTasks(tasks: Task[]) {
     const today = getTodayInputDate();
-
-    const habitTasks = tasks.filter(
-      (task) => task.category === "Hábito"
+  
+    const habitBases = tasks.filter(
+      (task) => task.category === "Hábito" && task.isHabitBase
     );
-
-    if (habitTasks.length === 0) return tasks;
-
-    // Já existe hábito hoje?
-    const existsToday = habitTasks.some(
-      (task) => isSameDay(task.date, today)
-    );
-
-    if (existsToday) return tasks;
-
-    // Já foi concluído hoje?
-    const completedToday = habitTasks.some(
+  
+    if (habitBases.length === 0) return tasks;
+  
+    const habitInstancesToday = tasks.filter(
       (task) =>
-        isSameDay(task.date, today) && task.completed
+        task.category === "Hábito" &&
+        !task.isHabitBase &&
+        isSameDay(task.date, today)
     );
-
-    if (completedToday) return tasks;
-
-    const baseHabit = habitTasks[0];
-
-    const newTask: Task = {
-      ...baseHabit,
+  
+    if (habitInstancesToday.length > 0) return tasks;
+  
+    const newInstances = habitBases.map((base) => ({
+      ...base,
       id: crypto.randomUUID(),
       date: today,
       completed: false,
-    };
-
-    return [...tasks, newTask];
+      isHabitBase: false,
+    }));
+  
+    return [...tasks, ...newInstances];
   }
+  
+  
 
 
   function addTask(title: string, date: string, category: string) {
     if (!title.trim()) return;
-
+  
+    const isHabit = category === "Hábito";
+  
     const newTask: Task = {
-      id: `${Date.now()}-${Math.random()}`,
+      id: crypto.randomUUID(),
       title,
       completed: false,
-      date: category === "Hábito" ? "" : date,
+      date: isHabit ? "" : date,
       category,
+      isHabitBase: isHabit,
     };
-
+  
     setTasks((prev) => [...prev, newTask]);
   }
+  
+  
 
   function toggleTask(id: string) {
     updateTask(id, {

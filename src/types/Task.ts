@@ -6,4 +6,6 @@ export interface Task {
     category: string;
     isHabit?: boolean;
     completedDates?: string[];
+    habitId?: string;
+    isHabitBase?: boolean;
 }
