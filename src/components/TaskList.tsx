@@ -60,12 +60,14 @@ export function TaskList({ tasks, onToggle, onDelete, emptyMessage }: TaskListPr
         </div>
       )}
 
-      <div className="flex items-center gap-2 mt-4">
-        <ClipboardList size={18} className="text-primary" />
-        <span className="text-md font-semibold text-primary">
-          Tarefas
-        </span>
-      </div>
+      {normalTasks.length > 0 && (
+        <div className="flex items-center gap-2 mt-4">
+          <ClipboardList size={18} className="text-primary" />
+          <span className="text-md font-semibold text-primary">
+            Tarefas
+          </span>
+        </div>
+      )}
 
       {sortedDates.map((date) => (
         <div key={date} className="mb-6">
