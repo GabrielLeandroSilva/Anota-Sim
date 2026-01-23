@@ -1,6 +1,6 @@
 "use client"
 
-import { Calendar, Check, Trash2 } from "lucide-react";
+import { Calendar, Check, RefreshCcw, Trash2 } from "lucide-react";
 import { Task } from "../types/Task";
 import { useState } from "react";
 import { formatDate } from "../app/utils/formatDate";
@@ -15,9 +15,10 @@ interface TaskItemProps {
 }
 
 export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
+  const isHabit = task.category === "Hábito";
   const [isAnimating, setIsAnimating] = useState(false);
-  const showToday = isToday(task.date);
-  const showOverdue = isPast(task.date) && !task.completed;
+  const showToday = !isHabit && isToday(task.date);
+  const showOverdue = !isHabit && isPast(task.date) && !task.completed;
 
   function handleToggle() {
     setIsAnimating(true);
@@ -47,7 +48,7 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
             ${task.completed
           ? "bg-zinc-100 dark:bg-zinc-800 opacity-70"
           : "hover:bg-zinc-50 dark:hover:bg-zinc-800"
-          }
+        }
             ${isAnimating ? "scale-[0.98] opacity-60" : ""}
             ${showOverdue ? "bg-red-400/10 border-red-400/50" : "bg-primary/10"}
           `}
@@ -79,12 +80,22 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
             `}>{task.title}</span>
 
         <div className="flex items-center gap-2 text-xs text-zinc-500 mt-1">
-          <Calendar size={12} />
-          <span>{formatDate(task.date)}</span>
+          {isHabit ? (
+            <>
+              <RefreshCcw size={12} className="text-primary"/>
+              <span className="font-medium text-primary">
+                Hábito diário
+              </span>
+            </>
+          ) : (
+            <>
+              <Calendar size={12} />
+              <span>{formatDate(task.date)}</span>
 
-          {showToday && <TodayBadge />}
-          {showOverdue && <OverdueBadge />}
-
+              {showToday && <TodayBadge />}
+              {showOverdue && <OverdueBadge />}
+            </>
+          )}
         </div>
 
       </div>

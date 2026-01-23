@@ -93,3 +93,20 @@ export function getTodayInputDate() {
 
   return `${year}-${month}-${day}`;
 }
+
+
+export function isSameDay(dateA: string, dateB: string) {
+  const parse = (date: string) => {
+    const [y, m, d] = date.split("-").map(Number);
+    return new Date(y, m - 1, d);
+  };
+
+  const a = parse(dateA);
+  const b = parse(dateB);
+
+  return (
+    a.getDate() === b.getDate() &&
+    a.getMonth() === b.getMonth() &&
+    a.getFullYear() === b.getFullYear()
+  );
+}

@@ -13,7 +13,7 @@ import ThemeToggle from "./ui/ThemeToggle";
 
 export default function Home() {
   const { section } = useNavigation();
-  const { tasks, addTask, toggleTask, removeTask  } = useTasks();
+  const { tasks, addTask, toggleTask, removeTask } = useTasks();
   const swipeHandlers = useSwipeNavigation();
 
   const todoTasks = tasks.filter((t) => !t.completed);
@@ -30,11 +30,11 @@ export default function Home() {
           <FadeInSection triggerKey="todo">
             <TaskList tasks={todoTasks} onToggle={toggleTask} onDelete={removeTask} emptyMessage="Nenhuma tarefa pendente" />
           </FadeInSection>
-          )}
+        )}
 
         {section === "done" && (
-        <FadeInSection triggerKey="done">
-          <TaskList tasks={doneTasks} onToggle={toggleTask} onDelete={removeTask} emptyMessage="Nenhuma tarefa concluída" />
+          <FadeInSection triggerKey="done">
+            <TaskList tasks={doneTasks} onToggle={toggleTask} onDelete={removeTask} emptyMessage="Nenhuma tarefa concluída" />
           </FadeInSection>
         )}
 

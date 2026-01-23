@@ -4,5 +4,6 @@ export const TASK_CATEGORIES = [
     "Estudos",
     "Saúde",
     "Compras",
+    "Hábito",
     "Outros",
 ];

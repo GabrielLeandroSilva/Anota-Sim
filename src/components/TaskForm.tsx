@@ -17,13 +17,18 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
   const [date, setDate] = useState(getTodayInputDate())
   const { setSection } = useNavigation();
 
+  const isHabit = category === "Hábito";
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     if (!title.trim()) return;
 
-    onAddTask(title, date, category);
+    onAddTask(title,
+      isHabit ? "" : date,
+      category);
     setTitle("");
+    setDate(getTodayInputDate());
     setSection("todo");
   }
 
@@ -45,13 +50,17 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
       <input
         type="date"
         value={date}
+        disabled={isHabit}
         onChange={(e) => setDate(e.target.value)}
-        className="w-full rounded-lg border px-4 py-3
+        className={`
+    w-full rounded-lg border px-4 py-3
     bg-transparent
     border-zinc-300 dark:border-zinc-700
-    focus:outline-none focus:ring-2 focus:ring-primary"
+    focus:outline-none focus:ring-2 focus:ring-primary
+    ${isHabit ? "opacity-50 cursor-not-allowed" : ""}
+  `}
       />
-      
+
       <CategorySelector
         value={category}
         onChange={setCategory}
