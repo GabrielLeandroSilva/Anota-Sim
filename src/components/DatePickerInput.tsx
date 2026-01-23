@@ -1,7 +1,7 @@
 "use client"
 
 import { Calendar } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { ptBR } from "react-day-picker/locale";
 import "react-day-picker/style.css";
@@ -14,9 +14,27 @@ interface DataPickerInputProps {
 
 export function DataPickerInput({ value, onChange, disabled }: DataPickerInputProps) {
   const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [])
 
   return (
-    <div className="relative w-full">
+    <div ref={containerRef} className="relative w-full">
       <button
         type="button"
         disabled={disabled}

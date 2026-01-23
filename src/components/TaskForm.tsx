@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigation } from "../providers/NavigationProvider";
 import { TASK_CATEGORIES } from "../app/constants/categories";
 import { CategorySelector } from "./CategorySelector";
-import { getTodayInputDate } from "../app/utils/date";
+import { formatDateToInput, getTodayInputDate } from "../app/utils/date";
 import { DataPickerInput } from "./DatePickerInput";
 
 
@@ -15,7 +15,6 @@ interface TaskFormProps {
 export function TaskForm({ onAddTask }: TaskFormProps) {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Pessoal");
-  //const [date, setDate] = useState(getTodayInputDate())
   const [date, setDate] = useState(new Date());
   const { setSection } = useNavigation();
 
@@ -28,7 +27,7 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
 
     onAddTask(
       title,
-      isHabit ? "" : date.toISOString().split("T")[0],
+      isHabit ? "" : formatDateToInput(date),
       category
     );
     setTitle("");
