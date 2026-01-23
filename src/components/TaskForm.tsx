@@ -5,6 +5,7 @@ import { useNavigation } from "../providers/NavigationProvider";
 import { TASK_CATEGORIES } from "../app/constants/categories";
 import { CategorySelector } from "./CategorySelector";
 import { getTodayInputDate } from "../app/utils/date";
+import { DataPickerInput } from "./DatePickerInput";
 
 
 interface TaskFormProps {
@@ -14,7 +15,8 @@ interface TaskFormProps {
 export function TaskForm({ onAddTask }: TaskFormProps) {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Pessoal");
-  const [date, setDate] = useState(getTodayInputDate())
+  //const [date, setDate] = useState(getTodayInputDate())
+  const [date, setDate] = useState(new Date());
   const { setSection } = useNavigation();
 
   const isHabit = category === "Hábito";
@@ -24,11 +26,13 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
 
     if (!title.trim()) return;
 
-    onAddTask(title,
-      isHabit ? "" : date,
-      category);
+    onAddTask(
+      title,
+      isHabit ? "" : date.toISOString().split("T")[0],
+      category
+    );
     setTitle("");
-    setDate(getTodayInputDate());
+    setDate(new Date());
     setSection("todo");
   }
 
@@ -47,19 +51,12 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
         autoFocus
       />
 
-      <input
-        type="date"
-        value={date}
-        disabled={isHabit}
-        onChange={(e) => setDate(e.target.value)}
-        className={`
-    w-full rounded-lg border px-4 py-3
-    bg-transparent
-    border-zinc-300 dark:border-zinc-700
-    focus:outline-none focus:ring-2 focus:ring-primary
-    ${isHabit ? "opacity-50 cursor-not-allowed" : ""}
-  `}
-      />
+        <DataPickerInput
+          value={date}
+          onChange={setDate}
+          disabled={isHabit}
+        />
+      
 
       <CategorySelector
         value={category}

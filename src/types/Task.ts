@@ -3,7 +3,7 @@ export interface Task {
     title: string;
     completed: boolean;
     date: string;
-    category?: string;
+    category: string;
     isHabit?: boolean;
     completedDates?: string[];
 }
