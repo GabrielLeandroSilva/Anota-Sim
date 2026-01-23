@@ -40,7 +40,7 @@ export function TaskList({ tasks, onToggle, onDelete, emptyMessage }: TaskListPr
     <div className="flex flex-col w-full">
       {habitTasks.length > 0 && (
         <div className="mb-2 pb-6 border-b-1 border-primary/30">
-          <div className="flex mb-2 gap-2">
+          <div className="flex items-center mb-2 gap-2">
             <RefreshCcw size={18} className="text-primary" />
             <span className="text-md font-semibold text-primary">
               Hábitos
