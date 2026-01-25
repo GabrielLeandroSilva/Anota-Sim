@@ -17,18 +17,24 @@ interface TaskListProps {
 }
 
 export function TaskList({ tasks, onToggle, onDelete, emptyMessage }: TaskListProps) {
-  const habitTasks = tasks.filter(
-    (task) => task.category === "Hábito"
-  );
+const visibleTasks = tasks.filter(
+  (task) => !(task.category === "Hábito" && task.isHabitBase)
+);
 
-  const normalTasks = tasks.filter(
-    (task) => task.category !== "Hábito"
-  );
+const habitTasks = visibleTasks.filter(
+  (task) => task.category === "Hábito"
+);
+
+const normalTasks = visibleTasks.filter(
+  (task) => task.category !== "Hábito"
+);
+
+  
 
   const groupedTasks = groupTasksByDateAndCategory(normalTasks);
   const sortedDates = sortTaskDates(Object.keys(groupedTasks));
 
-  if (normalTasks.length === 0 && habitTasks.length === 0) {
+  if (visibleTasks.length === 0) {
     return (
       <div className="flex-1 flex items-center justify-center">
         <EmptyState message={emptyMessage} />

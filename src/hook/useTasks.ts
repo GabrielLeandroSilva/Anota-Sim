@@ -45,21 +45,28 @@ export function useTasks() {
         isSameDay(task.date, today)
     );
   
-    if (habitInstancesToday.length > 0) return tasks;
+    const newInstances: Task[] = [];
   
-    const newInstances = habitBases.map((base) => ({
-      ...base,
-      id: crypto.randomUUID(),
-      date: today,
-      completed: false,
-      isHabitBase: false,
-    }));
+    habitBases.forEach((base) => {
+      const exists = habitInstancesToday.some(
+        (t) => t.title === base.title
+      );
+  
+      if (!exists) {
+        newInstances.push({
+          ...base,
+          id: crypto.randomUUID(),
+          date: today,
+          completed: false,
+          isHabitBase: false,
+        });
+      }
+    });
+  
+    if (newInstances.length === 0) return tasks;
   
     return [...tasks, ...newInstances];
   }
-  
-  
-
 
   function addTask(title: string, date: string, category: string) {
     if (!title.trim()) return;
@@ -88,11 +95,20 @@ export function useTasks() {
 
   function removeTask(id: string) {
     setTasks((prev) => {
-      const updated = prev.filter((task) => task.id !== id);
-      saveTasksToStorage(updated);
-      return updated;
+      const task = prev.find((t) => t.id === id);
+      if (!task) return prev;
+  
+      if (task.category === "Hábito") {
+        return prev.filter(
+          (t) =>
+            !(t.category === "Hábito" && t.title === task.title)
+        );
+      }
+  
+      return prev.filter((t) => t.id !== id);
     });
   }
+  
 
   function updateTask(id: string, data: Partial<Task>) {
     setTasks((prev) => {

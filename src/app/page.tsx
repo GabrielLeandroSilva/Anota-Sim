@@ -16,8 +16,13 @@ export default function Home() {
   const { tasks, addTask, toggleTask, removeTask } = useTasks();
   const swipeHandlers = useSwipeNavigation();
 
-  const todoTasks = tasks.filter((t) => !t.completed);
-  const doneTasks = tasks.filter((t) => t.completed);
+  const visibleTasks = tasks.filter(
+    (t) =>
+      !(t.category === "Hábito" && !t.date)
+  );
+
+  const todoTasks = visibleTasks.filter((t) => !t.completed);
+  const doneTasks = visibleTasks.filter((t) => t.completed);
 
   return (
     <main {...swipeHandlers} className="min-h-screen pb-20 px-4 flex flex-col touch-pan-y">
